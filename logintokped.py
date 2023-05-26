@@ -19,6 +19,9 @@ def test_login():
         driver.find_element(By.ID, "password-input").send_keys("tokopedia789")
         driver.find_element(By.CSS_SELECTOR, "span[aria-label='login-button']").click()
         time.sleep(5)
+
+def test_logout():
+        driver.find_element()
      
     
     
