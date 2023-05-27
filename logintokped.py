@@ -22,12 +22,14 @@ def test_login():
         time.sleep(5)
 
 def test_logout():
-        # menu = driver.find_element(By.ID, "my-profile-header")
-        # hover = ActionChains(driver).move_to_element(menu)
-        # hover.perform()
+        menu = driver.find_element(By.ID, "my-profile-header")
+        hover = ActionChains(driver).move_to_element(menu)
+        hover.perform()
 
         ActionChains(driver).move_to_element((driver.find_element(By.ID, "my-profile-header"))).perform()
         ActionChains(driver).move_to_element((driver.find_element(By.CSS_SELECTOR, ".css-1juts7j"))).click
         driver.find_element(By.CLASS_NAME, "css-1juts7j").click
-        time.sleep(50)
+        time.sleep(10)
+
+ 
     
