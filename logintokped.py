@@ -1,4 +1,3 @@
-import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -22,13 +21,13 @@ def test_login():
         time.sleep(10)
 
 def test_logout():
+        WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "[aria-labelledby=unf-modal-title]")))
+        driver.find_element(By.CLASS_NAME, "css-12huuhu").click()
         # Cara 1
         # menu = driver.find_element(By.ID, "my-profile-header")
         # hover = ActionChains(driver).move_to_element(menu)
         # hover.perform()
-        WebDriverWait(driver, 10).until(EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "[aria-labelledby=unf-modal-title]")))
-        driver.find_element(By.CLASS_NAME, "css-12huuhu").click()
-
+        
         # Cara 2
         ActionChains(driver).move_to_element((driver.find_element(By.CSS_SELECTOR, "[data-testid=btnHeaderMyProfile]"))).perform()
         driver.find_element(By.XPATH, "//div[@class='css-1juts7j']").click()
