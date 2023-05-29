@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import pytest
 import time
 
@@ -36,37 +37,17 @@ def test_positive_login(us, ps):
     driver.find_element(By.CSS_SELECTOR,"#user-name").send_keys(us)
     driver.find_element(By.ID,"password").send_keys(ps)
     driver.find_element(By.ID,"login-button").click()
-    expected_login = driver.find_element(By.XPATH, "//span[@class='title']").text
+    exp_login = ("https://www.saucedemo.com/inventory.html")
+    assert exp_login == driver.current_url
 
-    assert expected_login == "Products"
-
-    time.sleep(2)
+    time.sleep(5)
 
 # Testing Logout
 def test_logout():
-    inventory_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "title")))
-
-    # Klik tombol Menu
-    menu_button = driver.find_element(By.ID, "react-burger-menu-btn")
-    menu_button.click()
-
-    # Klik tombol Logout
-    logout_button = driver.find_element(By.ID, "logout_sidebar_link")
-    logout_button.click()
-
-    # Tunggu hingga halaman Login kembali terbuka
-    login_title = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "login_logo")))
-
-    # Menutup WebDriver
-    driver.quit()
-    # menuBtn = driver.find_element(By.CLASS_NAME, "bm-burger-button")
-    # menuBtn.click()
-    # logout_button = driver.find_element(By.ID, "logout_sidebar_link")
-    # logout_button.click()
-    # test_logout()
-    # time.sleep(5)
-    # driver.find_element(By.ID, "logout_sidebar_link").click
-    # result = driver.current_url
-
-    # assert result == "https://www.saucedemo.com"
-
+    btn_menu = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "bm-burger-button")))
+    btn_menu.click()
+    btn_logout = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "logout_sidebar_link")))
+    btn_logout.click()
+    login_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "login-button")))
+    assert login_button.is_displayed()
+    time.sleep(10)
